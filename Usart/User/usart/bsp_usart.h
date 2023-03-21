@@ -1,0 +1,95 @@
+#ifndef __BSP_USART_H
+#define __BSP_USART_H
+
+#include "bsp_led.h"
+#include "stm32f10x.h"
+#include <stdio.h>
+
+
+#define DEBUG_USART1 0
+#define DEBUG_USART2 0
+#define DEBUG_USART3 0
+#define DEBUG_UART4 1
+
+#if DEBUG_USART1
+//串口1-USART
+#define DEBUG_USARTx  USART1
+#define DEBUG_USART_CLK RCC_APB2Periph_USART1
+#define DEBUG_USART_APBxClkCmd RCC_APB2PeriphClockCmd
+#define DEBUG_USART_BAUDRATE 115200
+//USART GPIO 定义
+#define DEBUG_USART_GPIO_CLK (RCC_APB2Periph_GPIOA)
+#define DEBUG_USART_GPIO_APBxClkCmd RCC_APB2PeriphClockCmd
+#define DEBUG_USART_TX_GPIO_PORT GPIOA
+#define DEBUG_USART_TX_GPIO_PIN GPIO_Pin_9
+#define DEBUG_USART_RX_GPIO_PORT GPIOA
+#define DEBUG_USART_RX_GPIO_PIN GPIO_Pin_10
+//中断定义
+#define DEBUG_USART_IRQ USART1_IRQn
+#define DEBUG_USART_IRQHandler USART1_IRQHandler
+
+#elif DEBUG_USART2
+//串口2-USART
+#define DEBUG_USARTx  USART2
+#define DEBUG_USART_CLK RCC_APB1Periph_USART2
+#define DEBUG_USART_APBxClkCmd RCC_APB1PeriphClockCmd
+#define DEBUG_USART_BAUDRATE 115200
+//USART GPIO 定义
+#define DEBUG_USART_GPIO_CLK RCC_APB2Periph_GPIOA
+#define DEBUG_USART_GPIO_APBxClkCmd RCC_APB2PeriphClockCmd
+#define DEBUG_USART_TX_GPIO_PORT GPIOA
+#define DEBUG_USART_TX_GPIO_PIN GPIO_Pin_2
+#define DEBUG_USART_RX_GPIO_PORT GPIOA
+#define DEBUG_USART_RX_GPIO_PIN GPIO_Pin_3
+//中断定义
+#define DEBUG_USART_IRQ USART2_IRQn
+#define DEBUG_USART_IRQHandler USART2_IRQHandler
+
+#elif DEBUG_USART3
+//串口3-USART
+#define DEBUG_USARTx  USART3
+#define DEBUG_USART_CLK RCC_APB1Periph_USART3
+#define DEBUG_USART_APBxClkCmd RCC_APB1PeriphClockCmd //
+#define DEBUG_USART_BAUDRATE 115200
+//USART GPIO 定义
+#define DEBUG_USART_GPIO_CLK RCC_APB2Periph_GPIOB //
+#define DEBUG_USART_GPIO_APBxClkCmd RCC_APB2PeriphClockCmd //
+#define DEBUG_USART_TX_GPIO_PORT GPIOB
+#define DEBUG_USART_TX_GPIO_PIN GPIO_Pin_10
+#define DEBUG_USART_RX_GPIO_PORT GPIOB
+#define DEBUG_USART_RX_GPIO_PIN GPIO_Pin_11
+//中断定义
+#define DEBUG_USART_IRQ USART3_IRQn
+#define DEBUG_USART_IRQHandler USART3_IRQHandler
+
+#elif DEBUG_UART4
+//串口4-UART
+#define DEBUG_USARTx  UART4
+#define DEBUG_USART_CLK RCC_APB1Periph_UART4
+#define DEBUG_USART_APBxClkCmd RCC_APB1PeriphClockCmd //
+#define DEBUG_USART_BAUDRATE 115200
+//USART GPIO 定义
+#define DEBUG_USART_GPIO_CLK RCC_APB2Periph_GPIOC 
+#define DEBUG_USART_GPIO_APBxClkCmd RCC_APB2PeriphClockCmd //
+#define DEBUG_USART_TX_GPIO_PORT GPIOC
+#define DEBUG_USART_TX_GPIO_PIN GPIO_Pin_10
+#define DEBUG_USART_RX_GPIO_PORT GPIOC
+#define DEBUG_USART_RX_GPIO_PIN GPIO_Pin_11
+//中断定义
+#define DEBUG_USART_IRQ UART4_IRQn
+#define DEBUG_USART_IRQHandler UART4_IRQHandler
+#endif
+
+
+
+void USART_Config(void);
+//发送单个字节数据 8位
+void Usart_SendByte(USART_TypeDef* pUSARTx,uint8_t data); 
+//发送两个字节数据 16位
+void Usart_SendHalfWord(USART_TypeDef* pUSARTx,uint16_t data);
+//发送数组
+void Usart_SendArrays(USART_TypeDef* pUSARTx,uint8_t *array,uint8_t num);
+//发送字符串
+void Usart_SendStr(USART_TypeDef* pUSARTx,uint8_t *str);
+
+#endif
