@@ -8,13 +8,13 @@
 #include <stdio.h>
 int main(void)
 {
-		USART_Config();
-		i2c_CfgGpio();
-		LED_GPIO_Config();
-		LED_1(OFF);
-		LED_2(OFF);
-		printf("eeprom 软件模拟 i2c 测试例程 \r\n");
-
+		USART_Config(); //初始化串口
+		i2c_CfgGpio(); //初始化IIC设备
+		LED_GPIO_Config(); //初始化GPIO
+		LED_1(OFF); //关闭led1
+		LED_2(OFF); //关闭led1
+		printf("eeprom 软件模拟 i2c 测试例程 \r\n"); //输出串口数据
+		//判断读写数据是否一致
 	 if (ee_Test() == 1) {
 		LED_1(OFF);
 	 } else {
