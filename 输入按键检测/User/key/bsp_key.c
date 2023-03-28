@@ -12,7 +12,7 @@ void KEY_GPIO_Config(void){
     GPIO_Init(KEY1_PORT,&GPIO_InitStruct);
 }
 
-
+//读取电平
 void Key_Scan(GPIO_TypeDef *GPIOx,uint16_t GPIO_Pin)
 {
     if(GPIO_ReadInputDataBit(GPIOx,GPIO_Pin) == 0){
